@@ -1,1 +1,14 @@
-<p>search works!</p>
+<div class="row">
+  <div class="co">
+    <input
+      #word
+      (keyup)="search(word.value)"
+      type="text"
+      class="form-control"
+      placeholder="Buscar Artista"
+    />
+  </div>
+</div>
+
+<app-loading *ngIf="loading"></app-loading>
+<app-card *ngIf="!loading" [items]="artists"></app-card>

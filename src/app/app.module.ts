@@ -8,8 +8,13 @@ import { SearchComponent } from './components/search/search.component';
 import { ArtistComponent } from './components/artist/artist.component';
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
 
+import { HttpClientModule } from '@angular/common/http';
+
 // Importar Rutas
 import { ROUTES } from './app.routes';
+import { NoimagePipe } from './pipes/noimage.pipe';
+import { CardComponent } from './components/card/card.component';
+import { LoadingComponent } from './components/shared/loading/loading.component';
 
 @NgModule({
   declarations: [
@@ -18,8 +23,15 @@ import { ROUTES } from './app.routes';
     SearchComponent,
     ArtistComponent,
     NavbarComponent,
+    NoimagePipe,
+    CardComponent,
+    LoadingComponent,
   ],
-  imports: [BrowserModule, RouterModule.forRoot(ROUTES, { useHash: true })],
+  imports: [
+    BrowserModule,
+    HttpClientModule,
+    RouterModule.forRoot(ROUTES, { useHash: true }),
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

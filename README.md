@@ -45,4 +45,62 @@ Finalmente, en el componente `navbar.componenet.html`, agregar la ruta de los li
 
     <a class="nav-link" routerLinkActive="active" routerLink="home">Home</a>
     <a class="nav-link" routerLinkActive="active" routerLink="search">Search</a>
- 
+
+## Peticiones HTTP
+
+En el archivo `app.module.ts` importar el HttpClientModule
+...
+import { HttpClientModule } from '@angular/common/http';
+
+    @NgModule({
+        ...
+    imports: [
+        ...
+        HttpClientModule]
+    ...
+    })
+
+En el archivo `home.components.ts` realizar la peticion
+
+    import { HttpClient } from '@angular/common/http';
+
+    export class HomeComponent {
+
+    countries: any[] = [];
+        constructor(private http: HttpClient) {
+        this.http
+            .get('https://restcountries.com/v3.1/lang/spa')
+            .subscribe((data: any) => {
+                this.countries = data;
+                console.log(data);
+            });
+        }
+    }
+
+En el archivo `home.components.html`
+
+    <li *ngFor="let countrie of countries">{{ countrie.name.common }}</li>
+
+## Peticiones HTTP con Servicios
+
+Creamos un modulo de servicios
+
+    ng g s services/spotify
+
+Importamos el HttpClient y HttpHeaders en `spotify.serice.ts`
+
+    import { HttpClient, HttpHeaders } from '@angular/common/http';
+
+Luego creamos una clase para hacer la peticion GET despues del constructor
+
+    getNewReleases() {
+        const headers = new HttpHeaders({
+        Authorization:
+            'Bearer BQDJOEHLKxSdss4vCX0eBJXLmV1lCMLhhYyRMikD_5GhZ5Y4NBrkk8VIxBNp__MBBjwQAbTAoxV5kc2zBG0',
+    });
+    this.http
+        .get('https://api.spotify.com/v1/browse/new-releases?limit=20', {headers,})
+        .subscribe((data) => {
+            console.log(data);
+        });
+    }

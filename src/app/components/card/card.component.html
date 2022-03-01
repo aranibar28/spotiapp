@@ -1,5 +1,5 @@
 <div class="row row-cols-1 row-cols-md-4 g-4 m-auto">
-  <div class="col" *ngFor="let item of items">
+  <div class="col puntero" (click)="showArtist(item)" *ngFor="let item of items">
     <div class="card">
       <img [src]="item.images | noimage" class="card-img-top" alt="..." />
       <div class="card-body">
